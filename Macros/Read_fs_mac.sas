@@ -4,24 +4,39 @@
  Project:  NeighborhoodInfo DC
  Author:   P. Tatian
  Created:  08/23/06
- Version:  SAS 8.2
+ Version:  SAS 9.2
  Environment:  Windows
  
- Description:  Read Food Stamps raw data files into SAS.
+ Description:  Read SNAP (food Stamp) raw data files into SAS.
 
  Modifications:
 **************************************************************************/
 
 %macro Read_fs_mac( 
-  rawfolder = &_dcdata_path\TANF\Raw,
-  client = DHSA0218FS.txt, 
-  case = DHSA0216FS.txt,  
+  rawfolder = &_dcdata_r_path\TANF\Raw,
+  client = , 
+  case = ,  
   year =,  
-  month =,
-  corrections=
+  month = ,
+  corrections= ,
+  revisions = New file.
 );
 
+  %local outlib;
+
+  %if &_REMOTE_BATCH_SUBMIT %then %do;
+    %note_mput( macro=Read_fs_mac,
+                msg=Remote batch submit session. Data set will be finalized and registered with metadata. )
+    %let outlib=Tanf;
+  %end;
+  %else %do;
+    %note_mput( macro=Read_fs_mac,
+                msg=Not remote batch submit session. Data set will NOT be finalized. )
+    %let outlib=Work;
+  %end;
+
   %Read_tanf_fs_master(
+    outlib = &outlib,
     prefix = Fs_,
     label = Food stamp,
     abbr = food stamps,
@@ -30,7 +45,8 @@
     case = &case,  
     year = &year,
     month = &month,
-	corrections= &corrections
+    corrections= &corrections,
+    revisions = %str(&revisions)
   )
 
 %mend Read_fs_mac;

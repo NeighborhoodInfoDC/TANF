@@ -26,6 +26,7 @@
 **************************************************************************/
 
 %macro Read_tanf_fs_master( 
+  outlib =,
   prefix =,
   label =,
   abbr =,
@@ -34,12 +35,13 @@
   case = ,  
   year =,  
   month =,
-  corrections=
+  corrections = ,
+  revisions = 
 );
 
 ** Read in raw client data **;
 
-data TANF.&prefix.client_&year._&month. (label="&label cases, DC, &month/&year, client-level data");
+data &outlib..&prefix.client_&year._&month. (label="&label cases, DC, &month/&year, client-level data");
 
   infile "&rawfolder\&year-&month\&client" stopover lrecl=35 pad;
 
@@ -71,13 +73,13 @@ data TANF.&prefix.client_&year._&month. (label="&label cases, DC, &month/&year, 
 
 run;        
 
-proc sort data= TANF.&prefix.client_&year._&month.  ;
+proc sort data= &outlib..&prefix.client_&year._&month.  ;
   by caseid sort_order clientid;
   run;
 
 ** Read in raw case file data **;
 
-data TANF.&prefix.case_&year._&month. (label="&label cases, DC, &month/&year, case-level data");
+data &outlib..&prefix.case_&year._&month. (label="&label cases, DC, &month/&year, case-level data");
   
   infile "&rawfolder\&year-&month\&case" stopover lrecl=12 pad;
   
@@ -124,12 +126,12 @@ data TANF.&prefix.case_&year._&month. (label="&label cases, DC, &month/&year, ca
 run;
 
 %Dup_check(
-  data=TANF.&prefix.case_&year._&month.,
+  data=&outlib..&prefix.case_&year._&month.,
   by=caseid,
   id=tract_dc language
 )
 
-proc sort data= TANF.&prefix.case_&year._&month. nodupkey;
+proc sort data= &outlib..&prefix.case_&year._&month. nodupkey;
   by caseid;
   run;
 
@@ -141,8 +143,8 @@ data &prefix.&Year._&month;
   length uicaseid uiclientid 8;
 
   merge 
-    TANF.&prefix.case_&year._&month. (in=case) 
-    TANF.&prefix.client_&year._&month. (in=client);
+    &outlib..&prefix.case_&year._&month. (in=case) 
+    &outlib..&prefix.client_&year._&month. (in=client);
   by caseid;
   
   ** Create unique case and client ID numbers to replace IMA ID numbers **;
@@ -370,7 +372,7 @@ run;
 
 ** Create final file **;
 
-data Tanf.&prefix.&Year._&month 
+data &outlib..&prefix.&Year._&month 
        (label="&label client/case records, &month/&year, DC" 
         sortedby=uicaseid uiclientid);
 
@@ -480,7 +482,7 @@ run;
 
 ** File summary statistics **;
 
-proc print data=Tanf.&prefix.&Year._&month;
+proc print data=&outlib..&prefix.&Year._&month;
   where missing( tract_yr );
   var uicaseid uiclientid tract_DC Tract_full Tract_yr;
   title2 "Cases with missing tract";
@@ -488,10 +490,10 @@ run;
 
 title2;
 
-%File_info( data=Tanf.&prefix.&Year._&month, freqvars=filedate tract_yr educat ethnic language
+%File_info( data=&outlib..&prefix.&Year._&month, freqvars=filedate tract_yr educat ethnic language
   partcode relcode sex AdultAge ChildAge PI Fam_type )
 
-proc freq data=Tanf.&prefix.&Year._&month;
+proc freq data=&outlib..&prefix.&Year._&month;
   tables age;
   format age agefmt.;
   label age = "Age by groups";

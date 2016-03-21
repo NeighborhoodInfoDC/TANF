@@ -4,27 +4,23 @@
  Project:  NeighborhoodInfo DC
  Author:   P. Tatian
  Created:  08/23/06
- Version:  SAS 8.2
+ Version:  SAS 9.2
  Environment:  Windows with SAS/Connect
  
  Description:  Create format $TREMAP. for remapping tracts in 
  TANF/FS files from DC to standard format.
 
  Modifications:
-  09/16/08 PAT  Now can use other tract years besides 1980.
-  10/03/11 PAT  Now runs on Alpha.
+  09/16/08 PAT Now can use other tract years besides 1980.
+  10/03/11 PAT Now runs on Alpha.
   10/13/12 BJL Added new tract definitions
+  03/21/16 PAT Updated for SAS1.
 **************************************************************************/
 
-%include "K:\Metro\PTatian\DCData\SAS\Inc\Stdhead.sas";
-%include "K:\Metro\PTatian\DCData\SAS\Inc\AlphaSignon.sas" /nosource2;
+%include "L:\SAS\Inc\StdLocal.sas"; 
 
 ** Define libraries **;
 %DCData_lib( TANF )
-
-** Start submitting commands to remote server **;
-
-rsubmit;
 
 ** Add missing tracts to file **;
 
@@ -134,10 +130,4 @@ run;
 )
 
 run;
-
-endrsubmit;
-
-** End submitting commands to remote server **;
-
-signoff;
 
