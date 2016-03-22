@@ -29,11 +29,18 @@
 %include "L:\SAS\Inc\StdLocal.sas"; 
 
 ** Define libraries **;
-%DCData_lib( TANF, local=n )
+%DCData_lib( TANF )
 
 
 %Sum_tr_mac( 
 
+  /** Change to N for testing, Y for final batch mode run **/
+  finalize = Y,
+
+  /** Update with information on latest file revision **/
+  revisions = %str(Updated with FS_2014_01.),
+
+  /** Add new update data sets to this list **/
   input_data = 
     Tanf.FS_2000_07 (rename=(geo1980=tract_full))
     Tanf.FS_2001_01 (rename=(geo1980=tract_full)) 
@@ -66,6 +73,8 @@
 	Tanf.FS_2014_01
 	,
 
+  /*---------- DO NOT CHANGE BELOW THIS LINE ----------*/
+
   sum_vars = 
     Fs_client Fs_fulpart Fs_unborn Fs_0to1 Fs_2to5 Fs_6to12
     Fs_13to17 Fs_child Fs_adult Fs_18to24 Fs_black Fs_white
@@ -97,5 +106,4 @@
 
 );
 
-/**signoff;**/
 

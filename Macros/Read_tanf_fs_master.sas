@@ -499,6 +499,24 @@ proc freq data=&outlib..&prefix.&Year._&month;
   label age = "Age by groups";
 
 run;
+
+%** If final version, register metadata **;
+
+%if &_REMOTE_BATCH_SUBMIT %then %do;
+
+  ** Register metadata **;
+  
+  %Dc_update_meta_file(
+    ds_lib=&Lib,
+    ds_name=&data,
+    creator_process=Read_&data..sas,
+    restrictions=Confidential,
+    revisions=%str(&revisions)
+  )
+  
+%end;  
+
+run;
   
 %mend Read_tanf_fs_master;
 
