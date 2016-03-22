@@ -26,18 +26,18 @@
 %include "L:\SAS\Inc\StdLocal.sas"; 
 
 ** Define libraries **;
-%DCData_lib( TANF, local=n )
+%DCData_lib( TANF )
 
-/**rsubmit;**/
 
 %Create_all_summary_from_tracts( 
 
   /** Change to N for testing, Y for final batch mode run **/
-  register=Y,
+  finalize=Y,
   
   /** Update with information on latest file revision **/
-  /*revisions=%str(Updated with Tanf_2012_01),*/
   revisions=%str(Updated with Tanf_2014_01),
+
+  /*---------- DO NOT CHANGE BELOW THIS LINE ----------*/
 
   lib=Tanf,
   data_pre=Tanf_sum, 
@@ -51,8 +51,4 @@
 )
 
 run;
-
-/**endrsubmit;
-
-signoff;**/
 
