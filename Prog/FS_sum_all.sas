@@ -19,6 +19,8 @@
     03/18/13 RMP Updated with FS_2013_01
     04/23/14 MSW Updated for FS_2013_07 and modified for SAS server
     04/24/14 MSW Updated for FS_2014_01
+	04/15/16 JD Updated for FS_2014_07
+	04/15/16 JD Updated for FS_2015_01
 **************************************************************************/
 
 %include "L:\SAS\Inc\StdLocal.sas"; 
@@ -29,10 +31,10 @@
 %Create_all_summary_from_tracts( 
 
   /** Change to N for testing, Y for final batch mode run **/
-  finalize=Y,
+		  finalize=N,
   
   /** Update with information on latest file revision **/
-  revisions=%str(Updated with FS_2014_01.),
+  revisions=%str(Updated with FS_2015_01.),
 
   /*---------- DO NOT CHANGE BELOW THIS LINE ----------*/
 

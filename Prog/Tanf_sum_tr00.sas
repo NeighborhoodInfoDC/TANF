@@ -28,6 +28,8 @@
 03/18/13 BJL Updated with tanf_2013_01.
 04/17/14 MSW Updated with tanf_2013_07 and for the SAS1 Server.
 04/24/14 MSW Updated with tanf_2014_01. 
+04/15/16 JD Updated with Tanf_2014_07.
+04/15/16 JD Updated with Tanf_2015_01.
 **************************************************************************/
 
 %include "L:\SAS\Inc\StdLocal.sas"; 
@@ -39,10 +41,10 @@
 %Sum_tr_mac( 
 
   /** Change to N for testing, Y for final batch mode run **/
-  finalize = Y,
+  finalize = N,
 
   /** Update with information on latest file revision **/
-  revisions = %str(Updated with Tanf_2014_01.),
+  revisions = %str(Updated with Tanf_2015_01.),
 
   /** Add new update data sets to this list **/
   input_data = 
@@ -78,6 +80,8 @@
 	Tanf.Tanf_2013_01
 	Tanf.Tanf_2013_07
 	Tanf.Tanf_2014_01
+	Tanf.Tanf_2014_07
+	Tanf.Tanf_2015_01
     ,
 
   /*---------- DO NOT CHANGE BELOW THIS LINE ----------*/
