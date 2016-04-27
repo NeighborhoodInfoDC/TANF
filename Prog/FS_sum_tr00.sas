@@ -24,6 +24,8 @@
   03/18/13 BJL Updated with fs_2013_01.
   04/23/14 MSW Updated with fs_2013_07 and modified for SAS1 Server.
   04/24/14 MSW Updated with fs_2014_01.
+  04/15/16 JD Updated with fs_2014_07.
+  04/15/16 JD Updated with fs_2015_01.
 **************************************************************************/
 
 %include "L:\SAS\Inc\StdLocal.sas"; 
@@ -38,7 +40,7 @@
   finalize = Y,
 
   /** Update with information on latest file revision **/
-  revisions = %str(Updated with FS_2014_01.),
+  revisions = %str(Updated with FS_2015_01.),
 
   /** Add new update data sets to this list **/
   input_data = 
@@ -71,6 +73,8 @@
 	Tanf.FS_2013_01
 	Tanf.FS_2013_07
 	Tanf.FS_2014_01
+	Tanf.FS_2014_07
+	Tanf.FS_2015_01
 	,
 
   /*---------- DO NOT CHANGE BELOW THIS LINE ----------*/
