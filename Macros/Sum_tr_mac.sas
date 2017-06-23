@@ -187,7 +187,7 @@
 
   ** Recode missing values to zero (0) **;
 
-  data &outlib..&prefix._sum_tr00 (label="&label client/case summary, DC, Census tract (2000)" sortedby=geo2000);
+  data &prefix._sum_tr00 (label="&label client/case summary, DC, Census tract (2000)" sortedby=geo2000);
 
     set _&prefix._sum_tr00;
     
@@ -201,25 +201,28 @@
     
   run;
   
-  %File_info( data=&outlib..&prefix._sum_tr00, printobs=0 )
 
   run;
   
   %** If final file, register with metadata **;
   
-  %if %mparam_is_yes( &finalize ) %then %do;
+  /*%if %mparam_is_yes( &finalize ) %then %do;*/
   
-    ** Register metadata **;
+    ** Finalize dataset **;
+
+	%Finalize_data_set(
+    data=&prefix._sum_tr00,
+    out=&prefix._sum_tr00,
+    outlib=tanf,
+    label=:"&label client/case summary, DC, Census tract (2000)",
+    sortby=geo2000,
+    /** Metadata parameters **/
+    revisions=%str(&revisions),
+    /** File info parameters **/
+    printobs=0
+  )
     
-    %Dc_update_meta_file(
-      ds_lib=Tanf,
-      ds_name=Tanf_sum_tr00,
-      creator_process=Tanf_sum_tr00.sas,
-      restrictions=Confidential,
-      revisions=%str(&revisions.)
-    )
-    
-  %end;
+  /*%end;*/
   
   run;
 
