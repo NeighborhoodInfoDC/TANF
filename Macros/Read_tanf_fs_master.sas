@@ -23,6 +23,7 @@
                Include uicaseid and uiclientid in message about missing
                case or client record.
   10/13/12 BJL Updated for 2012 tracts
+  06/23/17 RP Update to read csv raw data (DHS did not provide flat text)
 **************************************************************************/
 
 %macro Read_tanf_fs_master( 
@@ -43,10 +44,41 @@
 
 data &outlib..&prefix.client_&year._&month. (label="&label cases, DC, &month/&year, client-level data");
 
+  %if &year < 2015 %then %do;
+
   infile "&rawfolder\&year-&month\&client" stopover lrecl=35 pad;
 
   input @1 caseid $8. @9 clientid $10. @19 relcode $2. @21 partcode $2. 
     @23 DOB yymmdd8. @31 ethnic $2. @33 sex $1. @34 educat 2.;
+
+  %end;
+
+  /* Updated for files 2015-7 and later to read CSV instead of flat text */
+
+  %else %do;
+
+  filename fimport "&rawfolder\&year-&month\&client" lrecl=2000;
+
+  infile FIMPORT delimiter = ',' MISSOVER DSD lrecl=32767 firstobs=1 ;
+
+  informat caseid $8.;
+  informat clientid $10.;
+  informat relcode $2.;
+  informat partcode $2.;
+  informat DOB_ $10.;
+  informat ethnic $2.;
+  informat sex $1.;
+  informat educat 2.;
+
+  input caseid $ clientid $ relcode $ partcode $ 
+    DOB_ $ ethnic $ sex $ educat ;
+
+  DOB = input( substr( DOB_, 1, 10 ), yymmdd8. );
+  drop DOB_;
+
+  format DOB yymmdd8.;
+
+  %end;
 
   ** Recode missing values **;
 
@@ -81,9 +113,30 @@ proc sort data= &outlib..&prefix.client_&year._&month.  ;
 
 data &outlib..&prefix.case_&year._&month. (label="&label cases, DC, &month/&year, case-level data");
   
+  %if &year < 2015 %then %do;
+
   infile "&rawfolder\&year-&month\&case" stopover lrecl=12 pad;
   
   input @1 caseid $8. @9 tract_DC $3. @12 language $1.;
+
+  %end;
+
+ /* Updated for files 2015-7 and later to read CSV instead of flat text */
+
+  %else %do;	
+
+  filename fimport "&rawfolder\&year-&month\&case" lrecl=2000;
+
+  infile FIMPORT delimiter = ',' MISSOVER DSD lrecl=32767 firstobs=1 ;
+
+  informat caseid $8.;
+  informat tract_DC $3.;
+  informat language $1.;
+
+  input caseid $ tract_DC $ language $;
+
+  %end;
+
   
   format language $lang.; 
   

@@ -37,7 +37,7 @@
 %Sum_tr_mac( 
 
   /** Change to N for testing, Y for final batch mode run **/
-  finalize = Y,
+  finalize = N,
 
   /** Update with information on latest file revision **/
   revisions = %str(Updated with FS_2015_01.),
