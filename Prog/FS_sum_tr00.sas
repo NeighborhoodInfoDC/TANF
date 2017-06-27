@@ -40,7 +40,7 @@
   finalize = N,
 
   /** Update with information on latest file revision **/
-  revisions = %str(Updated with FS_2015_01.),
+  revisions = %str(Updated with FS_2015_07.),
 
   /** Add new update data sets to this list **/
   input_data = 
@@ -75,6 +75,7 @@
 	Tanf.FS_2014_01
 	Tanf.FS_2014_07
 	Tanf.FS_2015_01
+	Tanf.FS_2015_07
 	,
 
   /*---------- DO NOT CHANGE BELOW THIS LINE ----------*/

@@ -44,7 +44,7 @@
   finalize = N,
 
   /** Update with information on latest file revision **/
-  revisions = %str(Updated with Tanf_2015_01.),
+  revisions = %str(Updated with Tanf_2015_07.),
 
   /** Add new update data sets to this list **/
   input_data = 
@@ -82,6 +82,7 @@
 	Tanf.Tanf_2014_01
 	Tanf.Tanf_2014_07
 	Tanf.Tanf_2015_01
+	Tanf.Tanf_2015_07
     ,
 
   /*---------- DO NOT CHANGE BELOW THIS LINE ----------*/
