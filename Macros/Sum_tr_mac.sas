@@ -201,6 +201,7 @@
     
   run;
   
+  %File_info( data=&prefix._sum_tr00, printobs=0 )
 
   run;
   
