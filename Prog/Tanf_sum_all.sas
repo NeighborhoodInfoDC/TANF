@@ -23,6 +23,7 @@
 04/24/14 MSW Updated with Tanf_2014_01.
 04/15/16 JD Updated with Tanf_2014_07.
 04/15/16 JD Updated with Tanf_2015_01.
+08/01/17 RP Updated through Tanf_2016_07.
 **************************************************************************/
 
 %include "L:\SAS\Inc\StdLocal.sas"; 
@@ -34,10 +35,10 @@
 %Create_all_summary_from_tracts( 
 
   /** Change to N for testing, Y for final batch mode run **/
-  finalize=N,
+  finalize=Y,
   
   /** Update with information on latest file revision **/
-  revisions=%str(Updated with Tanf_2015_07.),
+  revisions=%str(Updated through Tanf_2016_07.),
 
   /*---------- DO NOT CHANGE BELOW THIS LINE ----------*/
 

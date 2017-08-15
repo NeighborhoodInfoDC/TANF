@@ -1,5 +1,5 @@
 /**************************************************************************
- Program:  Read_fs_2015_07.sas
+ Program:  Read_Tanf_2016_01.sas
  Library:  TANF
  Project:  NeighborhoodInfo DC
  Author:   Noah Strayer
@@ -7,10 +7,10 @@
  Version:  SAS 9.2
  Environment:  Windows
  
- Description:  Read SNAP (food stamp) case & client raw files into SAS.
+ Description:  Read TANF case & client data from raw files into SAS.
 
  Modifications:
- 04/24/14 MSW Modified for the SAS1 Server
+ 04/24/14 MSW Modified for SAS1 Server
 **************************************************************************/
 
 %include "L:\SAS\Inc\StdLocal.sas"; 
@@ -21,12 +21,12 @@
 
 *--- EDIT PARAMETERS BELOW -----------------------------------------;
 
-%Read_fs_mac(
-  year = 2015,  
-  month = 07,  
-  case = DHSA0216.FS201507.csv,    
-  client =  DHSA0218.FS201507.csv 
+%Read_Tanf_mac(
+  year = 2016,  
+  month = 01, 
+  case = DHSA0216.AF201601.csv,    
+  client = DHSA0218.AF201601.csv   
 )
 
-run;
+
 

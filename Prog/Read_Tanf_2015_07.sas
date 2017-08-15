@@ -1,5 +1,5 @@
 /**************************************************************************
- Program:  Read_Tanf_yyyy_mm.sas
+ Program:  Read_Tanf_2015_07.sas
  Library:  TANF
  Project:  NeighborhoodInfo DC
  Author:   Noah Strayer
@@ -22,11 +22,11 @@
 *--- EDIT PARAMETERS BELOW -----------------------------------------;
 
 %Read_Tanf_mac(
-  year = ,    /** 2015 **/
-  month = ,   /** 07 **/
-  case = ,    /** DHSA0216.AF201507.csv **/
-  client =    /** DHSA0218.AF201507.csv **/
+  year = 2015,  
+  month = 07,   
+  case = DHSA0216.AF201507.csv,  
+  client = DHSA0218.AF201507.csv  
 )
 
-run;
+
 

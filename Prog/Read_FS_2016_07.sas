@@ -1,5 +1,5 @@
 /**************************************************************************
- Program:  Read_fs_2015_07.sas
+ Program:  Read_fs_2016_07.sas
  Library:  TANF
  Project:  NeighborhoodInfo DC
  Author:   Noah Strayer
@@ -22,10 +22,10 @@
 *--- EDIT PARAMETERS BELOW -----------------------------------------;
 
 %Read_fs_mac(
-  year = 2015,  
-  month = 07,  
-  case = DHSA0216.FS201507.csv,    
-  client =  DHSA0218.FS201507.csv 
+  year = 2016,   
+  month = 07,   
+  case = DHSA0216.FS201607.csv,   
+  client =  DHSA0218.FS201607.csv 
 )
 
 run;
