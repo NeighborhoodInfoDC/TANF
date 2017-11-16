@@ -23,7 +23,7 @@
 %let outfolder = tanf; /* Name of folder where output CSV will be saved */
 %let sumdata = tanf_sum; /* Summary dataset name (without geo suffix) */
 %let start = 2000; /* Start year */
-%let end = 2016; /* End year */
+%let end = 2015; /* End year */
 %let keepvars = Tanf_client; /* Summary variables to keep and transpose */
 
 
@@ -52,33 +52,22 @@ data &sumdata._&geo._long_allyr;
 		  timeframe = "Year of Data";
 run;
 
-
-/*Subset datasets by year */
-%do j = &start. %to &end.;
-data &sumdata._&geo._long_&j. ;
-	set &sumdata._&geo._long_allyr;
-	where timeframe ="&j." ;
-run;
-
-
 /* Create metadata for the dataset */
 proc contents data = &sumdata._&geo._long_allyr out = &sumdata._&geo._metadata noprint;
 run;
 
-
 /* Output the metadata */
-ods csv file ="&_dcdata_default_path.\web\output\&outfolder.\&geo.\&outfolder._&geo._metadata..csv";
+ods csv file ="&_dcdata_default_path.\web\output\&outfolder.\&outfolder._&geo._metadata..csv";
 	proc print data =&sumdata._&geo._metadata noobs;
 	run;
 ods csv close;
 
 
-/* Output each year as a separate CSV */
-ods csv file ="&_dcdata_default_path.\web\output\&outfolder.\&geo.\&outfolder._&geo._&j..csv";
-	proc print data =&sumdata._&geo._long_&j. noobs;
+/* Output the CSV */
+ods csv file ="&_dcdata_default_path.\web\output\&outfolder.\&outfolder._&geo..csv";
+	proc print data =&sumdata._&geo._long_allyr noobs;
 	run;
-ods csv close;
-%end;
+ods csv close
 
 
 %mend csv_create;
