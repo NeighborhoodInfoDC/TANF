@@ -22,6 +22,7 @@
 	04/15/16 JD Updated for FS_2014_07
 	04/15/16 JD Updated for FS_2015_01
     08/01/17 RP Updated through FS_2016_07
+    06/04/18 YS Revision to add Stanton Commons in the summary
 **************************************************************************/
 
 %include "L:\SAS\Inc\StdLocal.sas"; 
@@ -32,10 +33,10 @@
 %Create_all_summary_from_tracts( 
 
   /** Change to N for testing, Y for final batch mode run **/
-		  finalize=Y,
+		  finalize=N,
   
   /** Update with information on latest file revision **/
-  revisions=%str(Updated through FS_2016_07.),
+  revisions=%str(Add Stantoncommons to summary),
 
   /*---------- DO NOT CHANGE BELOW THIS LINE ----------*/
 
