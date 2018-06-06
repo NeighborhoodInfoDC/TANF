@@ -24,6 +24,7 @@
 04/15/16 JD Updated with Tanf_2014_07.
 04/15/16 JD Updated with Tanf_2015_01.
 08/01/17 RP Updated through Tanf_2016_07.
+06/04/18 YS Updated to include Stanton Commons in summary
 **************************************************************************/
 
 %include "L:\SAS\Inc\StdLocal.sas"; 
@@ -38,7 +39,7 @@
   finalize=Y,
   
   /** Update with information on latest file revision **/
-  revisions=%str(Updated through Tanf_2016_07.),
+  revisions=%str(Add StantonCommons to Summary),
 
   /*---------- DO NOT CHANGE BELOW THIS LINE ----------*/
 
